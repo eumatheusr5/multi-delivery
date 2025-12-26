@@ -1,0 +1,31 @@
+name: multi-delivery
+region: nyc
+services:
+  - name: web
+    github:
+      repo: seu-usuario/multi-delivery
+      branch: main
+      deploy_on_push: true
+    build_command: npm install && npm run build
+    run_command: npm start
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "8080"
+      - key: DB_HOST
+        value: multi-delivery-db-do-user-29786342-0.g.db.ondigitalocean.com
+      - key: DB_PORT
+        value: "25060"
+      - key: DB_NAME
+        value: defaultdb
+      - key: DB_USER
+        value: doadmin
+      - key: DB_PASSWORD
+        type: SECRET
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    routes:
+      - path: /
+
